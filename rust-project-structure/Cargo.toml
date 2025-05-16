@@ -1,0 +1,24 @@
+[package]
+name = "rust-project-structure"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+# DAG handling and DOT drawing
+petgraph = { version = "0.8.1", default-features = false, features = ["graphmap", "std"] }
+# Error handling
+anyhow = "1.0.98"
+# UTF-8 paths
+camino = "1.1.9"
+# CLI
+clap = { version = "4.5.38", features = ["derive"] }
+# Logging
+log = { version = "0.4.27", features = ["kv", "kv_serde"] }
+env_logger = { version = "0.11.8", features = ["kv"] }
+# (De-)serialization and TOML
+serde = { version = "1.0.219", features = ["derive"] }
+toml = "0.8.22"
+# Directory traversal
+walkdir = "2.5.0"
+# Utils
+itertools = "0.14.0"
