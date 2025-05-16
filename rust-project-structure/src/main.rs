@@ -55,11 +55,18 @@ fn main() -> anyhow::Result<()> {
 
     let mut teams = read_teams(&teams_path)
         .with_context(|| format!("failed to read team specs from `{teams_path}`"))?;
-    debug_teams("all teams", &teams);
 
     // Drop marker teams...
     teams.retain(|t| t.kind != TeamKind::MarkerTeam);
-    debug_teams("non-`marker-team`s", &teams);
+
+    // FIXME: throwaway code, not pretty.
+    match args.cmd {
+        cli::Cmd::ExcludeMarkerTeams => {}
+        cli::Cmd::OnlyTeams => {
+            // Drop WGs and PGs too...
+            teams.retain(|t| t.kind == TeamKind::Team);
+        }
+    }
 
     // Establish a DAG formed from "subteam-of" relationships.
     let mut subteam_of_graph: GraphMap<&str, &str, Directed> = GraphMap::new();
@@ -122,12 +129,4 @@ fn read_teams(teams_path: &Utf8Path) -> anyhow::Result<Vec<Team>> {
     }
 
     Ok(team_specs)
-}
-
-fn debug_teams(msg: &'static str, teams: &[Team]) {
-    if log_enabled!(Level::Debug) {
-        for i in 0..5 {
-            debug!(example_team:? = teams[i]; "{msg}: teams[{i}]");
-        }
-    }
 }
