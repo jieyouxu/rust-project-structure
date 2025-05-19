@@ -28,7 +28,7 @@ use anyhow::Context;
 use camino::Utf8Path;
 use clap::Parser;
 use itertools::Itertools;
-use log::{Level, debug, info, log_enabled};
+use log::{debug, info};
 use petgraph::Directed;
 use petgraph::dot::{Config, Dot};
 use petgraph::graphmap::GraphMap;

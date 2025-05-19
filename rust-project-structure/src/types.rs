@@ -96,18 +96,20 @@ pub enum Person {
     },
 }
 
-impl Person {
-    pub fn github(&self) -> &str {
-        match self {
-            Person::Simple(github) => github,
-            Person::WithMeta { github, .. } => github,
-        }
-    }
-
-    pub fn roles(&self) -> Option<&BTreeSet<String>> {
-        match self {
-            Person::Simple(..) => None,
-            Person::WithMeta { roles, .. } => Some(roles),
-        }
-    }
-}
+// FIXME: temporarily unused.
+//
+//impl Person {
+//    pub fn github(&self) -> &str {
+//        match self {
+//            Person::Simple(github) => github,
+//            Person::WithMeta { github, .. } => github,
+//        }
+//    }
+//
+//    pub fn roles(&self) -> Option<&BTreeSet<String>> {
+//        match self {
+//            Person::Simple(..) => None,
+//            Person::WithMeta { roles, .. } => Some(roles),
+//        }
+//    }
+//}
